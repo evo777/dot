@@ -1,1 +1,3 @@
-# dot
+# Getting Started
+
+`npm start`
