@@ -22,16 +22,19 @@ app.post('/pic',(req,res)=>{
 });
 
 app.post('/predict',(req,resp)=>{
+  console.log("post request works");
   console.log(req.body.data.substr(0,200));
   app1.models.predict('dot', req.body.data)
     .then((res) => {
       if(res['outputs'][0].data['concepts'][0].value > 0.10){
         let msg = `hey ${res['outputs'][0].data['concepts'][0].id}, how are you doing, welcome to garagescript`
-       googleTTS("good god", 'en', 1).then((url) => {
+       googleTTS(msg, 'en', 1).then((url) => {
             resp.json({url:url})
        });
         console.log(msg);
       console.log(res['outputs'][0].data['concepts'][0].id);
+      }else{
+        resp.json({url:"out of database"})
       }
     })
     .catch((err)=>{
@@ -41,6 +44,7 @@ app.post('/predict',(req,resp)=>{
 })
 
 app.post('/train',(req,res)=>{
+  console.log("post request works");
   app1.inputs.create({
     base64: req.body.data,
     concepts: [
@@ -67,4 +71,8 @@ app.post('/train',(req,res)=>{
 const clarifai = require('clarifai')
 const app1 = new clarifai.App({
   apiKey: 'dc9cbce1a5ae451ebd4097433b038d2f'
+});
+
+app.get('/test',(req,res)=>{
+  res.json({url:'test'})
 });

@@ -32,4 +32,3 @@ const click = document.getElementById("click")
       pic.setRequestHeader('Content-type','application/json');
       pic.send(JSON.stringify({data:dataURL,name}));
 };
-
