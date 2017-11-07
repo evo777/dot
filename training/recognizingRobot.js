@@ -1,7 +1,7 @@
 const bodyparser=require('body-parser')
 const clarifai = require('clarifai')
 const app1 = new clarifai.App({
-  apiKey: 'dc9cbce1a5ae451ebd4097433b038d2f'
+  apiKey: '****'
 });
 
 const app = express();
